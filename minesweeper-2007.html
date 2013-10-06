@@ -1,0 +1,503 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+Javascript版扫雷v2.2 (13K)
+By: 无心
+qq: 673344346
+简述:
+	规则与Windows扫雷相同，支持双键翻雷，标记可疑地区，自定义难度。
+	2004年08月，写了这个Javascript版扫雷，并在CSDN发布。
+	2006年12月，重新翻出这个旧作，改进双键效果，精简部分代码，并增强了代码可读性。
+	v2.1修改代码使得在firefox 1.0下可以运行。
+	2013年10月，v2.2，修改bug，改进了浏览器兼容性，修正了游戏结束的判断逻辑。
+-->
+<html>
+<head>
+<title> Javascript版扫雷 (By: 无心) </title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<STYLE TYPE="text/css" TITLE="">
+body { -moz-user-select: none; }
+#T td {font-size:10pt; text-align:center; width:20px; height:20px; border-width:1px; border-style:solid; border-color:#FFFFFF #000000 #000000 #FFFFFF; }
+#T td.open { border-color:#000000 #FFFFFF #FFFFFF #000000; }
+#TD_Face { border-width:2px; border-style:solid; border-color:#FFFFFF #808080 #808080 #FFFFFF; }
+#TD_Face.down { border-color:#808080 #FFFFFF #FFFFFF #808080; }
+.Wingdings {font-family:Wingdings;}
+.Webdings {font-family:Webdings;}
+.black{color:black;}
+.yellow{color:yellow;}
+.red{color:red;}
+</STYLE>
+</head>
+<body>
+<center>
+
+<TABLE border=1 cellspacing=2 cellpadding=2 bgcolor=#D0D0D0 bordercolorlight=#000000 bordercolordark=#FFFFFF style="cursor:default" oncontextmenu="return false">
+<TR>
+<TD height=16>
+	<TABLE width="100%" border=0 cellspacing=0 cellpadding=0>
+	<TR>
+		<TD>
+			<div id=T_Title style="font-size:10pt;height:16px;overflow:hidden;">
+				<font face='Wingdings' color=black style="font-size:12pt">M</font>扫雷Javascript版(by:无心)
+			</div>
+		</TD>
+	</TR>
+	</TABLE>
+</TD>
+</TR>
+<TR>
+	<TD>
+<input type="button" value="开局" onclick="drawTable2()">
+<input type="button" value="初级" onclick="SetLevel(1)">
+<input type="button" value="中级" onclick="SetLevel(2)">
+<input type="button" value="高级" onclick="SetLevel(3)">
+<input type="button" value="自定义" onclick="ReDefine()">
+<input type="button" value="?" onclick="ShowAbout()" title="关于…" style="width:20px;">
+	</TD>
+</TR>
+<TR>
+	<TD>
+		<TABLE width="100%" border=0 cellspacing=0 cellpadding=2>
+		<TR>
+			<TD width=40 align=left>
+				<TABLE width="40" height="26" cellspacing=0 cellpadding=0 border=1 bordercolorlight="#FFFFFF" bordercolordark="#000000">
+				<TR><TD id=TD_MineRest title="剩余地雷数" bordercolorlight="#808080" bordercolordark="#D0D0D0" align="right" bgcolor=black style="color:red;font-weight:bold;letter-spacing:2">
+				120
+				</TD></TR>
+				</TABLE>
+			</TD>
+			<TD align=center>
+				<TABLE id=T_Face width="26" height="26" cellspacing=0 cellpadding=0 border=0 !bordercolorlight="#FFFFFF" !bordercolordark="#000000">
+				<TR><TD id=TD_Face !bordercolorlight="#808080" !bordercolordark="#D0D0D0" align="center" style="font-size:14pt" onclick="drawTable2()" onmousedown="this.className='down'" onmouseout="this.className=''" onmouseup="this.className=''">
+				&nbsp;
+				</TD></TR>
+				</TABLE>
+			</TD>
+			<TD width=40 align=right>
+				<TABLE width="40" height="26" cellspacing=0 cellpadding=0 border=1 bordercolorlight="#FFFFFF" bordercolordark="#000000">
+				<TR><TD id=TD_TimePast title="已用时间秒数" bordercolorlight="#808080" bordercolordark="#D0D0D0" align="right" bgcolor=black style="color:red;font-weight:bold;letter-spacing:2">
+				0
+				</TD></TR>
+				</TABLE>
+			</TD>
+		</TR>
+		</TABLE>
+	</TD>
+</TR>
+<TR>
+	<TD align=center>
+<SPAN id=T_Span>
+<TABLE id=T border=1 cellspacing=0 cellpadding=0 bgcolor=#D0D0D0 !bordercolorlight=#000000 !bordercolordark=#FFFFFF>
+</TABLE>
+</SPAN>
+	</TD>
+</TR>
+</TABLE>
+
+<script language="JavaScript">
+<!--
+var Face1="<span class='Wingdings black'>J</span>"; //高兴//笑脸
+var Face2="<span class='Wingdings black'>K</span>"; //注意
+var Face3="<span class='Wingdings red'>L</span>"; //沮丧
+var DarkColor="#000000", LightColor="#FFFFFF";
+var Mine="<span class='Wingdings red'>M</span>"; //雷标
+var Quest="<span class='Webdings blue'>s</span>"; //疑问
+var MineEnd="<span class='Wingdings black'>M</span>"; //未揭的雷，最后自动排出的
+var Explode="<span class='Wingdings yellow'>M</span>"; //爆炸
+var ExplodedBgcolor="#ff0000";
+var NMColors=["blue","green","red","darkblue","darkred","hotpink","purple","teal"];
+var rowsCount=16,colsCount=16,MinesCount=40;
+var gridCount=rowsCount*colsCount;
+var MinesPos=[],NMArr=[];
+var Start=0,GameOver=0;
+var MineRest=0,TimePast=0,OpenCount=0;
+var mouseI=0; //判别鼠标单击、两键同时按下
+
+var T_TD,
+	T=document.getElementById("T"),
+	T_Span=document.getElementById("T_Span"),
+	TD_Face=document.getElementById("TD_Face"),
+	TD_MineRest=document.getElementById("TD_MineRest"),
+	TD_TimePast=document.getElementById("TD_TimePast");
+
+function ShowAbout(){
+	alert("\nJavascript版扫雷\n\n规则:\t与Windows扫雷相同。\n\nBy:\t无心 2006年12月\nQQ:\t673344346");
+}
+function getEleTD(evt){
+	evt = evt || window.event;
+	var ele = evt.srcElement || evt.target;
+	var ele2= ele.parentElement || ele.parentNode;
+	var ele3= ele2.parentElement || ele2.parentNode;
+	if(ele.name=="T_TD"){
+		return ele;
+	}else if(ele2 && ele2.name=="T_TD"){
+		return ele2;
+	}else if(ele3 && ele3.name=="T_TD"){
+		return ele3;
+	}else{
+		return null;
+	}
+}
+
+//对一个格子及其相邻格子执行一个函数
+function execAround(f,td,bIncludeSelf){
+	if(!td)return;
+	if(bIncludeSelf)f(td);
+	f(td.UpTD);
+	f(td.DownTD);
+	f(td.LeftTD);
+	f(td.RightTD);
+	f(td.LeftUpTD);
+	f(td.RightUpTD);
+	f(td.LeftDownTD);
+	f(td.RightDownTD);
+}
+
+function document__onmouseover(evt){
+	var td=getEleTD(evt);
+	if(td)mouseI=0;
+}
+document.onmouseover=document__onmouseover;
+function document__onmouseout(evt){
+	var td=getEleTD(evt);
+	if(td && mouseI==2){
+		//取消闪烁相邻的空白区
+		function f(td){
+			if(td && td.sta=="")td.className='';
+		}
+		execAround(f,td,1);
+	}
+	if(td)mouseI=0;
+}
+document.onmouseout=document__onmouseout;
+
+function document__onmousedown(evt){
+	var td=getEleTD(evt);
+	if(td)mouseI+=1;
+	if(mouseI==2){ /* 双键按下 */
+		//闪烁相邻的空白区
+		function f(td){
+			if(td && td.sta=="")td.className='open';
+		}
+		execAround(f,td,1);
+	}
+}
+document.onmousedown=document__onmousedown;
+
+function document__onmouseup(evt){
+	var td=getEleTD(evt);
+	if(!td){return;}
+	if(!Start){
+		Start=1;
+		CountTime();
+	}
+	if(mouseI==1){
+		mouseI=0;
+		SClick(td,evt);
+	}else if(mouseI==2){
+		mouseI=0;
+			//取消闪烁相邻的空白区
+			function f(td){
+				if(td && td.sta=="")td.className='';
+			}
+			execAround(f,td,1);
+		DClick(td,evt);
+	}else if(mouseI==0){
+	}
+}
+document.onmouseup=document__onmouseup;
+
+window.onload = drawTable;
+document.onselectstart = function(){return false;};
+document.onkeydown = function(e){
+	e = e||window.event;
+	if((e.keyCode||e.which)==113){
+		drawTable();
+	}
+};
+
+function drawTable(){ //画表 (在改变布局(行数列数雷数)的情况下，重新开局)
+	var ir=0,ic=0,im=0,s="";
+	var td,hasUp,hasDown,hasLeft,hasRight;
+	gridCount=rowsCount*colsCount;
+	while(rowsCount<T.rows.length){T.deleteRow(0);}
+	while(rowsCount>T.rows.length){T.insertRow(-1);}
+	for(var i=0;i<T.rows.length;i++){
+		var row=T.rows[i];
+		while(colsCount<row.cells.length){row.deleteCell(0);}
+		while(colsCount>row.cells.length){var td=row.insertCell(0);td.name='T_TD';td.innerHTML='&nbsp;';}
+	}
+
+	T_TD=[];
+	for(ir=0;ir<rowsCount;ir++){
+		for(ic=0;ic<colsCount;ic++){
+			T_TD[T_TD.length]=T.rows[ir].cells[ic];
+		}
+	}
+	for(im=0;im<gridCount;im++){
+		td=T_TD[im];
+		hasUp = im>=colsCount;
+		hasDown = im<=(rowsCount-1)*colsCount-1;
+		hasLeft = (im % colsCount)>0;
+		hasRight = (im % colsCount)<colsCount-1;
+		td.UpTD=(hasUp ? T_TD[im-colsCount] : null);
+		td.DownTD=(hasDown ? T_TD[im+colsCount] : null);
+		td.LeftTD=(hasLeft ? T_TD[im-1] : null);
+		td.RightTD=(hasRight ? T_TD[im+1] : null);
+		td.LeftUpTD=((hasLeft && hasUp) ? T_TD[im-1-colsCount] : null);
+		td.RightUpTD=((hasRight && hasUp) ? T_TD[im+1-colsCount] : null);
+		td.LeftDownTD=((hasLeft && hasDown) ? T_TD[im-1+colsCount] : null);
+		td.RightDownTD=((hasRight && hasDown) ? T_TD[im+1+colsCount] : null);
+	}
+	drawTable2();
+}
+function drawTable2(){ //画表2 (在不改变布局(行数列数雷数)的情况下，重新开局)
+	//html
+	T.style.visibility="hidden";
+	var ir=0,ic=0,im=0,s="";
+	TD_Face.innerHTML=Face1;
+	TD_MineRest.innerHTML=MinesCount;
+	TD_TimePast.innerHTML=0;
+	Start=0;
+	GameOver=0;
+	MineRest=MinesCount;
+	TimePast=0;
+	OpenCount=0;
+	gridCount=rowsCount*colsCount;
+	//随机放雷
+	MinesPos.length=gridCount;
+	var msl=0,ms="",tmpPos=0,tmpM="";
+	msl=gridCount-MinesCount;
+	for(im=0;im<msl;im+=20){
+	ms+="0000000000"+"0000000000";
+	}
+	ms=ms.substr(0,msl);
+	for(im=0;im<MinesCount;im++){
+		tmpPos=Math.floor(msl*Math.random());
+		ms=ms.substr(0,tmpPos)+"1"+ms.substr(tmpPos);
+	}
+	for(im=0;im<gridCount;im++){
+		var td=T_TD[im];
+		setInit(td);
+		td.bgColor="";
+		tmpM=ms.charAt(im);
+		MinesPos[im]= (tmpM=="0" ? 0 : 1);
+		td.hasMine=tmpM;
+		td.NM="0";
+		td.active="0";
+		td.sta="";
+		td.BA="";
+		td.i=im;
+	}
+	var NM=0;
+	function f(td){
+		if(td && td.hasMine=="1")NM++;
+	}
+	for(im=0;im<gridCount;im++){
+		NM=0;
+		td=T_TD[im];
+		if(!MinesPos[im]){
+		execAround(f,td,0);
+		}
+		T_TD[im].NM=NM;
+	}
+	T.style.visibility="visible";
+}
+function ReDefine(){ //自定义(行列大且雷数少，将可能导致计算溢出)
+	var a1=prompt("自定义：行数(8~24)，列数(8~30)，雷数(至少10)：", rowsCount+","+colsCount+","+MinesCount);
+	if(!a1){return;}
+	// 8 <=行数<=24，8 <=列数<=30
+	//10 <=雷数<= (行数-1)*(列数-1)
+	if(!a1.search(/^(\d{1,2}),(\d{1,2}),(\d{1,3})$/)<0){return;}
+	var ir=parseInt(RegExp.$1), ic=parseInt(RegExp.$2), im=parseInt(RegExp.$3);
+	if(ir<8)  ir=8;
+	if(ir>24) ir=24;
+	if(ic<8)  ic=8;
+	if(ic>30) ic=30;
+	if(im<10) im=10;
+	if(im>(ir-1)*(ic-1)) im=(ir-1)*(ic-1);
+	if(rowsCount==ir && colsCount==ic && MinesCount==im){
+		drawTable2();
+	}else{
+		rowsCount=ir, colsCount=ic, MinesCount=im;
+		drawTable();
+	}
+}
+function SetLevel(Level){ //Level: 1初级 2中级 3高级
+	switch(Level){
+		case 1:
+			rowsCount=8, colsCount=8, MinesCount=10;
+			break;
+		case 2:
+			rowsCount=16, colsCount=16, MinesCount=40;
+			break;
+		case 3:
+			rowsCount=16, colsCount=30, MinesCount=99;
+			break;
+		default:
+			return;
+	}
+	drawTable();
+}
+function setInit(td) //恢复
+{
+	td.className='';
+	td.innerHTML="&nbsp;";
+	td.sta='';
+}
+function setOpen(td) //翻开
+{
+	td.className='open';
+	td.sta="Open";
+	OpenCount++;
+	if(OpenCount+MinesCount==gridCount){
+		GameOver=1;
+	}
+}
+//OpenBA 递归调用，打开相邻的空白区
+function OpenBA(td){
+	if(!td){return;}
+	var im=td.i;
+	if(td.hasMine=="1"){return;}
+	if(td.sta!="" && td.sta!="Quest"){return;}
+	if(td.NM!="0"){
+		setOpen(td);
+		setNM(td);
+		return;
+	}
+	//翻开本格
+	if(td.sta=="Quest"){setInit(td);}
+	setOpen(td);
+	//翻开相邻的空白区
+	execAround(OpenBA,td,0);
+}
+function setMine(td) //雷标
+{
+	addMineRest(-1);
+	td.innerHTML=Mine;
+	td.sta="Mine";
+}
+function setQuest(td) //疑问
+{
+	td.innerHTML=Quest;
+	td.sta="Quest";
+}
+function setExplode(td) //爆炸
+{
+	td.bgColor=ExplodedBgcolor;
+	td.innerHTML=Explode;
+	td.sta="Explode";
+	TD_Face.innerHTML=Face3;
+	GameOver=1;
+	showAll();
+}
+function CountTime() //开始计时
+{
+	if(GameOver){
+		if(OpenCount+MinesCount==gridCount){
+			alert("扫雷成功，恭喜您！"+(TimePast==999 ?"":"耗时"+TimePast+"秒"));
+		}
+		return;
+	}
+	if(TimePast==999){return;}
+	setTimeout("CountTime()",1000);
+	TimePast+=1;
+	TD_TimePast.innerHTML=TimePast;
+}
+function addMineRest(i) //剩余雷数，可为负数
+{
+	MineRest+=i;
+	TD_MineRest.innerHTML=MineRest;
+}
+function setNM(td) //显示雷数
+{
+	var NM=td.NM;
+	if(NM>0){
+		td.innerHTML= NM;
+		td.style.color = NMColors[parseInt(NM)-1];
+		td.style.fontWeight = "bold";
+	}
+}
+function showAll() //显示全部
+{
+	var td
+	for(var im=0;im<gridCount;im++){
+		td=T_TD[im];
+		if(td.sta=="" && td.hasMine=="1"){
+			td.innerHTML=MineEnd;
+			setOpen(td);
+		}
+	}
+}
+function SClick(td,evt) //单击
+{
+	if(GameOver){return;}
+	if((evt||window.event).button==2){
+		RClick(td,evt); //右击
+		return;
+	}
+	if(evt && evt.preventDefault) evt.preventDefault();
+	else if(window.event)  window.event.returnValue = false;
+	if(td.sta!="" && td.sta!="Quest"){return;}
+	if(td.hasMine=="1"){
+		setExplode(td);
+	}else if(td.NM!=""){
+		setOpen(td);
+		setNM(td);
+	}else if(td.NM=="" && td.hasMine=="0"){
+		OpenBA(td);
+	}
+}
+function DClick(td,evt) //鼠标双键释放时
+{
+	if(GameOver){return;}
+	if(evt && evt.preventDefault) evt.preventDefault();
+	else if(window.event)  window.event.returnValue = false;
+	var h=td.hasMine;
+	//翻开相邻的空白区
+	if(!(td.sta=="Open" && td.NM>0)){return;}
+	var aroundTDS=[];
+	with(td){
+	aroundTDS=[UpTD,DownTD,LeftTD,RightTD,LeftUpTD,RightUpTD,LeftDownTD,RightDownTD];
+	}
+	var MCount_Flag=0; //周围已标雷的格数
+	var MCount_hide=0; //周围藏有雷的格数
+	for(var i=0;i<aroundTDS.length;i++){
+		if(!aroundTDS[i]){continue;}
+		if(aroundTDS[i].sta=="Mine"){MCount_Flag++;}
+		if(aroundTDS[i].sta!="Mine" && aroundTDS[i].hasMine=="1"){MCount_hide++;}
+	}
+	if(MCount_Flag!=td.NM){return;}
+	var tmpTD;
+	for(var i=0;i<aroundTDS.length;i++){
+		tmpTD=aroundTDS[i]
+		if(!tmpTD){continue;}
+		if(MCount_hide==0){
+			OpenBA(tmpTD);
+		}else{
+			if(tmpTD.hasMine=="1" && tmpTD.sta!="Mine"){
+				setExplode(tmpTD);
+				return;
+			}
+		}
+	}
+}
+function RClick(td,evt) //右击
+{
+	if(evt && evt.preventDefault) evt.preventDefault();
+	else if(window.event)  window.event.returnValue = false;
+	var sta=td.sta;
+	if(sta==""){
+		setMine(td);
+	}else if(sta=="Mine"){
+		setQuest(td);
+		addMineRest(1);
+	}else if(sta=="Quest"){
+		setInit(td);
+	}
+}
+//-->
+</script>
+</center>
+</body>
+</html>
+
