@@ -33,15 +33,15 @@
 <g id="gFlags"></g>
 
 <g class="events-none">
-<path d="M0,310 l10,-10 h50v30h-60z" class="button" />
+<path d="M0,310 l10,-10 h50v20l-10,10h-50z" class="button" />
 <text x="30" y="322" id="numTimePast" fill="#006600" text-anchor="middle">0</text>
 </g>
 <g class="events-none">
-<path d="M290,310 l10,-10 h50v30h-60z" class="button" />
+<path d="M290,310 l10,-10 h50v20l-10,10h-50z" class="button" />
 <text x="320" y="322" id="needOpenRest" fill="#006600" text-anchor="middle">0</text>
 </g>
 <g class="events-none">
-<path d="M360,310 l10,-10 h50v30h-60z" class="button" />
+<path d="M360,310 l10,-10 h50v20l-10,10h-50z" class="button" />
 <text x="390" y="322" id="numMinesRest" fill="#006600" text-anchor="middle">0</text>
 </g>
 <g class="events-none">
