@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>检测一组牌是不是一条龙</title>
+<style type="text/css">
+body {background-color:gainsboro;}
+#cards {width:400px;}
+#traceOutput {font-size:16px;}
+#traceOutput b{color:green;}
+#ckResult {font-size:18px;color:chocolate;}
+</style>
+</head>
+
+<body>
+<h1>检测一组牌是不是一条龙</h1>
+题目描述：给定N(N≥2且N≤14)张已知的扑克牌，每张表示一个数字，2~K分别表示2~13的数字，A可以表示1或14，小王可以表示1到5的任一数字，大王可以表示1到14的任一数字，求判断能否用这些牌（每张牌必须用到且只用1次）构成一个差为1的等差数列（一条龙）？ 
+<p>指定牌 <input type="text" id="cards" placeholder="例如: 8,7,小王,6,J,Q,K,10,A,大王
+" value="2,3,8,9,A,大王,小王,大王,小王"> <button type="button" id="btnCheck">检测</button></p>
+<p id="ckResult"></p>
+识别的字符：<b>2,3,4,5,6,7,8,9,10,J,Q,K,小王, 大王, RED_JOKER, BLACK_JOKER</b>, 使用空格或者逗号分开
+<br>大城小胖题：2,3,8,9,A,大王,小王,大王,小王
+<br>大城小胖题：8 9 10 J Q A 小王 小王 大王 大王
+<br><br>
+
+随机6张牌 <button type="button" id="btnRnd">换一组</button>
+<pre id="traceOutput"></pre>
+
+<script src="checkSequence-3.js"></script>
+
+</body>
+</html>

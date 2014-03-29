@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>svg in safari</title>
+</head>
+
+<body>
+
+<script>
+onload=test;
+
+function insertSVG(str){
+	var parser = new DOMParser();
+	var svgdoc = parser.parseFromString(str, 'text/xml');
+	var node = document.importNode(svgdoc.documentElement,true);
+	document.body.appendChild(node);
+	var svgNS="http://www.w3.org/2000/svg";
+	var script = document.createElementNS(svgNS,'script');
+	node.appendChild(script);
+	var g = document.createElementNS(svgNS,'g');
+	node.appendChild(g);
+}
+function test(){
+	insertSVG('<svg id="root" width="300" height="200" xmlns="http://www.w3.org/2000/svg">\
+	<rect x="0" y="0" width="300" height="200" fill="#ccffcc" />\
+	</svg>');
+}
+</script>
+
+</body>
+</html>
