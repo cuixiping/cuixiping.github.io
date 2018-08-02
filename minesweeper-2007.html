@@ -1,19 +1,20 @@
 <!doctype html public "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!--
-Javascript°æÉ¨À×v2.2 (13K)
-By: ÎŞĞÄ
+Javascriptç‰ˆæ‰«é›·v2.2 (13K)
+By: æ— å¿ƒ
 qq: 673344346
-¼òÊö:
-	¹æÔòÓëWindowsÉ¨À×ÏàÍ¬£¬Ö§³ÖË«¼ü·­À×£¬±ê¼Ç¿ÉÒÉµØÇø£¬×Ô¶¨ÒåÄÑ¶È¡£
-	2004Äê08ÔÂ£¬Ğ´ÁËÕâ¸öJavascript°æÉ¨À×£¬²¢ÔÚCSDN·¢²¼¡£
-	2006Äê12ÔÂ£¬ÖØĞÂ·­³öÕâ¸ö¾É×÷£¬¸Ä½øË«¼üĞ§¹û£¬¾«¼ò²¿·Ö´úÂë£¬²¢ÔöÇ¿ÁË´úÂë¿É¶ÁĞÔ¡£
-	v2.1ĞŞ¸Ä´úÂëÊ¹µÃÔÚfirefox 1.0ÏÂ¿ÉÒÔÔËĞĞ¡£
-	2013Äê10ÔÂ£¬v2.2£¬ĞŞ¸Äbug£¬¸Ä½øÁËä¯ÀÀÆ÷¼æÈİĞÔ£¬ĞŞÕıÁËÓÎÏ·½áÊøµÄÅĞ¶ÏÂß¼­¡£
+ç®€è¿°:
+	è§„åˆ™ä¸Windowsæ‰«é›·ç›¸åŒï¼Œæ”¯æŒåŒé”®ç¿»é›·ï¼Œæ ‡è®°å¯ç–‘åœ°åŒºï¼Œè‡ªå®šä¹‰éš¾åº¦ã€‚
+	2004å¹´08æœˆï¼Œå†™äº†è¿™ä¸ªJavascriptç‰ˆæ‰«é›·ï¼Œå¹¶åœ¨CSDNå‘å¸ƒã€‚
+	2006å¹´12æœˆï¼Œé‡æ–°ç¿»å‡ºè¿™ä¸ªæ—§ä½œï¼Œæ”¹è¿›åŒé”®æ•ˆæœï¼Œç²¾ç®€éƒ¨åˆ†ä»£ç ï¼Œå¹¶å¢å¼ºäº†ä»£ç å¯è¯»æ€§ã€‚
+	v2.1ä¿®æ”¹ä»£ç ä½¿å¾—åœ¨firefox 1.0ä¸‹å¯ä»¥è¿è¡Œã€‚
+	2013å¹´10æœˆï¼Œv2.2ï¼Œä¿®æ”¹bugï¼Œæ”¹è¿›äº†æµè§ˆå™¨å…¼å®¹æ€§ï¼Œä¿®æ­£äº†æ¸¸æˆç»“æŸçš„åˆ¤æ–­é€»è¾‘ã€‚
 -->
 <html>
 <head>
-<title> Javascript°æÉ¨À× (By: ÎŞĞÄ) </title>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta charset="utf-8" />
+<title> Javascriptç‰ˆæ‰«é›· (By: æ— å¿ƒ) </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <STYLE TYPE="text/css" TITLE="">
 body { -moz-user-select: none; }
 #T td {font-size:10pt; text-align:center; width:20px; height:20px; border-width:1px; border-style:solid; border-color:#FFFFFF #000000 #000000 #FFFFFF; }
@@ -37,7 +38,7 @@ body { -moz-user-select: none; }
 	<TR>
 		<TD>
 			<div id=T_Title style="font-size:10pt;height:16px;overflow:hidden;">
-				<font face='Wingdings' color=black style="font-size:12pt">M</font>É¨À×Javascript°æ(by:ÎŞĞÄ)
+				<font face='Wingdings' color=black style="font-size:12pt">M</font>æ‰«é›·Javascriptç‰ˆ(by:æ— å¿ƒ)
 			</div>
 		</TD>
 	</TR>
@@ -46,12 +47,12 @@ body { -moz-user-select: none; }
 </TR>
 <TR>
 	<TD>
-<input type="button" value="¿ª¾Ö" onclick="drawTable2()">
-<input type="button" value="³õ¼¶" onclick="SetLevel(1)">
-<input type="button" value="ÖĞ¼¶" onclick="SetLevel(2)">
-<input type="button" value="¸ß¼¶" onclick="SetLevel(3)">
-<input type="button" value="×Ô¶¨Òå" onclick="ReDefine()">
-<input type="button" value="?" onclick="ShowAbout()" title="¹ØÓÚ¡­" style="width:20px;">
+<input type="button" value="å¼€å±€" onclick="drawTable2()">
+<input type="button" value="åˆçº§" onclick="SetLevel(1)">
+<input type="button" value="ä¸­çº§" onclick="SetLevel(2)">
+<input type="button" value="é«˜çº§" onclick="SetLevel(3)">
+<input type="button" value="è‡ªå®šä¹‰" onclick="ReDefine()">
+<input type="button" value="?" onclick="ShowAbout()" title="å…³äºâ€¦" style="width:20px;">
 	</TD>
 </TR>
 <TR>
@@ -60,7 +61,7 @@ body { -moz-user-select: none; }
 		<TR>
 			<TD width=40 align=left>
 				<TABLE width="40" height="26" cellspacing=0 cellpadding=0 border=1 bordercolorlight="#FFFFFF" bordercolordark="#000000">
-				<TR><TD id=TD_MineRest title="Ê£ÓàµØÀ×Êı" bordercolorlight="#808080" bordercolordark="#D0D0D0" align="right" bgcolor=black style="color:red;font-weight:bold;letter-spacing:2">
+				<TR><TD id=TD_MineRest title="å‰©ä½™åœ°é›·æ•°" bordercolorlight="#808080" bordercolordark="#D0D0D0" align="right" bgcolor=black style="color:red;font-weight:bold;letter-spacing:2">
 				120
 				</TD></TR>
 				</TABLE>
@@ -74,7 +75,7 @@ body { -moz-user-select: none; }
 			</TD>
 			<TD width=40 align=right>
 				<TABLE width="40" height="26" cellspacing=0 cellpadding=0 border=1 bordercolorlight="#FFFFFF" bordercolordark="#000000">
-				<TR><TD id=TD_TimePast title="ÒÑÓÃÊ±¼äÃëÊı" bordercolorlight="#808080" bordercolordark="#D0D0D0" align="right" bgcolor=black style="color:red;font-weight:bold;letter-spacing:2">
+				<TR><TD id=TD_TimePast title="å·²ç”¨æ—¶é—´ç§’æ•°" bordercolorlight="#808080" bordercolordark="#D0D0D0" align="right" bgcolor=black style="color:red;font-weight:bold;letter-spacing:2">
 				0
 				</TD></TR>
 				</TABLE>
@@ -95,14 +96,14 @@ body { -moz-user-select: none; }
 
 <script language="JavaScript">
 <!--
-var Face1="<span class='Wingdings black'>J</span>"; //¸ßĞË//Ğ¦Á³
-var Face2="<span class='Wingdings black'>K</span>"; //×¢Òâ
-var Face3="<span class='Wingdings red'>L</span>"; //¾ÚÉ¥
+var Face1="<span class='Wingdings black'>J</span>"; //é«˜å…´//ç¬‘è„¸
+var Face2="<span class='Wingdings black'>K</span>"; //æ³¨æ„
+var Face3="<span class='Wingdings red'>L</span>"; //æ²®ä¸§
 var DarkColor="#000000", LightColor="#FFFFFF";
-var Mine="<span class='Wingdings red'>M</span>"; //À×±ê
-var Quest="<span class='Webdings blue'>s</span>"; //ÒÉÎÊ
-var MineEnd="<span class='Wingdings black'>M</span>"; //Î´½ÒµÄÀ×£¬×îºó×Ô¶¯ÅÅ³öµÄ
-var Explode="<span class='Wingdings yellow'>M</span>"; //±¬Õ¨
+var Mine="<span class='Wingdings red'>M</span>"; //é›·æ ‡
+var Quest="<span class='Webdings blue'>s</span>"; //ç–‘é—®
+var MineEnd="<span class='Wingdings black'>M</span>"; //æœªæ­çš„é›·ï¼Œæœ€åè‡ªåŠ¨æ’å‡ºçš„
+var Explode="<span class='Wingdings yellow'>M</span>"; //çˆ†ç‚¸
 var ExplodedBgcolor="#ff0000";
 var NMColors=["blue","green","red","darkblue","darkred","hotpink","purple","teal"];
 var rowsCount=16,colsCount=16,MinesCount=40;
@@ -110,7 +111,7 @@ var gridCount=rowsCount*colsCount;
 var MinesPos=[],NMArr=[];
 var Start=0,GameOver=0;
 var MineRest=0,TimePast=0,OpenCount=0;
-var mouseI=0; //ÅĞ±ğÊó±êµ¥»÷¡¢Á½¼üÍ¬Ê±°´ÏÂ
+var mouseI=0; //åˆ¤åˆ«é¼ æ ‡å•å‡»ã€ä¸¤é”®åŒæ—¶æŒ‰ä¸‹
 
 var T_TD,
 	T=document.getElementById("T"),
@@ -120,7 +121,7 @@ var T_TD,
 	TD_TimePast=document.getElementById("TD_TimePast");
 
 function ShowAbout(){
-	alert("\nJavascript°æÉ¨À×\n\n¹æÔò:\tÓëWindowsÉ¨À×ÏàÍ¬¡£\n\nBy:\tÎŞĞÄ 2006Äê12ÔÂ\nQQ:\t673344346");
+	alert("\nJavascriptç‰ˆæ‰«é›·\n\nè§„åˆ™:\tä¸Windowsæ‰«é›·ç›¸åŒã€‚\n\nBy:\tæ— å¿ƒ 2006å¹´12æœˆ\nQQ:\t673344346");
 }
 function getEleTD(evt){
 	evt = evt || window.event;
@@ -138,7 +139,7 @@ function getEleTD(evt){
 	}
 }
 
-//¶ÔÒ»¸ö¸ñ×Ó¼°ÆäÏàÁÚ¸ñ×ÓÖ´ĞĞÒ»¸öº¯Êı
+//å¯¹ä¸€ä¸ªæ ¼å­åŠå…¶ç›¸é‚»æ ¼å­æ‰§è¡Œä¸€ä¸ªå‡½æ•°
 function execAround(f,td,bIncludeSelf){
 	if(!td)return;
 	if(bIncludeSelf)f(td);
@@ -160,7 +161,7 @@ document.onmouseover=document__onmouseover;
 function document__onmouseout(evt){
 	var td=getEleTD(evt);
 	if(td && mouseI==2){
-		//È¡ÏûÉÁË¸ÏàÁÚµÄ¿Õ°×Çø
+		//å–æ¶ˆé—ªçƒç›¸é‚»çš„ç©ºç™½åŒº
 		function f(td){
 			if(td && td.sta=="")td.className='';
 		}
@@ -173,8 +174,8 @@ document.onmouseout=document__onmouseout;
 function document__onmousedown(evt){
 	var td=getEleTD(evt);
 	if(td)mouseI+=1;
-	if(mouseI==2){ /* Ë«¼ü°´ÏÂ */
-		//ÉÁË¸ÏàÁÚµÄ¿Õ°×Çø
+	if(mouseI==2){ /* åŒé”®æŒ‰ä¸‹ */
+		//é—ªçƒç›¸é‚»çš„ç©ºç™½åŒº
 		function f(td){
 			if(td && td.sta=="")td.className='open';
 		}
@@ -195,7 +196,7 @@ function document__onmouseup(evt){
 		SClick(td,evt);
 	}else if(mouseI==2){
 		mouseI=0;
-			//È¡ÏûÉÁË¸ÏàÁÚµÄ¿Õ°×Çø
+			//å–æ¶ˆé—ªçƒç›¸é‚»çš„ç©ºç™½åŒº
 			function f(td){
 				if(td && td.sta=="")td.className='';
 			}
@@ -215,7 +216,7 @@ document.onkeydown = function(e){
 	}
 };
 
-function drawTable(){ //»­±í (ÔÚ¸Ä±ä²¼¾Ö(ĞĞÊıÁĞÊıÀ×Êı)µÄÇé¿öÏÂ£¬ÖØĞÂ¿ª¾Ö)
+function drawTable(){ //ç”»è¡¨ (åœ¨æ”¹å˜å¸ƒå±€(è¡Œæ•°åˆ—æ•°é›·æ•°)çš„æƒ…å†µä¸‹ï¼Œé‡æ–°å¼€å±€)
 	var ir=0,ic=0,im=0,s="";
 	var td,hasUp,hasDown,hasLeft,hasRight;
 	gridCount=rowsCount*colsCount;
@@ -250,7 +251,7 @@ function drawTable(){ //»­±í (ÔÚ¸Ä±ä²¼¾Ö(ĞĞÊıÁĞÊıÀ×Êı)µÄÇé¿öÏÂ£¬ÖØĞÂ¿ª¾Ö)
 	}
 	drawTable2();
 }
-function drawTable2(){ //»­±í2 (ÔÚ²»¸Ä±ä²¼¾Ö(ĞĞÊıÁĞÊıÀ×Êı)µÄÇé¿öÏÂ£¬ÖØĞÂ¿ª¾Ö)
+function drawTable2(){ //ç”»è¡¨2 (åœ¨ä¸æ”¹å˜å¸ƒå±€(è¡Œæ•°åˆ—æ•°é›·æ•°)çš„æƒ…å†µä¸‹ï¼Œé‡æ–°å¼€å±€)
 	//html
 	T.style.visibility="hidden";
 	var ir=0,ic=0,im=0,s="";
@@ -263,7 +264,7 @@ function drawTable2(){ //»­±í2 (ÔÚ²»¸Ä±ä²¼¾Ö(ĞĞÊıÁĞÊıÀ×Êı)µÄÇé¿öÏÂ£¬ÖØĞÂ¿ª¾Ö)
 	TimePast=0;
 	OpenCount=0;
 	gridCount=rowsCount*colsCount;
-	//Ëæ»ú·ÅÀ×
+	//éšæœºæ”¾é›·
 	MinesPos.length=gridCount;
 	var msl=0,ms="",tmpPos=0,tmpM="";
 	msl=gridCount-MinesCount;
@@ -302,11 +303,11 @@ function drawTable2(){ //»­±í2 (ÔÚ²»¸Ä±ä²¼¾Ö(ĞĞÊıÁĞÊıÀ×Êı)µÄÇé¿öÏÂ£¬ÖØĞÂ¿ª¾Ö)
 	}
 	T.style.visibility="visible";
 }
-function ReDefine(){ //×Ô¶¨Òå(ĞĞÁĞ´óÇÒÀ×ÊıÉÙ£¬½«¿ÉÄÜµ¼ÖÂ¼ÆËãÒç³ö)
-	var a1=prompt("×Ô¶¨Òå£ºĞĞÊı(8~24)£¬ÁĞÊı(8~30)£¬À×Êı(ÖÁÉÙ10)£º", rowsCount+","+colsCount+","+MinesCount);
+function ReDefine(){ //è‡ªå®šä¹‰(è¡Œåˆ—å¤§ä¸”é›·æ•°å°‘ï¼Œå°†å¯èƒ½å¯¼è‡´è®¡ç®—æº¢å‡º)
+	var a1=prompt("è‡ªå®šä¹‰ï¼šè¡Œæ•°(8~24)ï¼Œåˆ—æ•°(8~30)ï¼Œé›·æ•°(è‡³å°‘10)ï¼š", rowsCount+","+colsCount+","+MinesCount);
 	if(!a1){return;}
-	// 8 <=ĞĞÊı<=24£¬8 <=ÁĞÊı<=30
-	//10 <=À×Êı<= (ĞĞÊı-1)*(ÁĞÊı-1)
+	// 8 <=è¡Œæ•°<=24ï¼Œ8 <=åˆ—æ•°<=30
+	//10 <=é›·æ•°<= (è¡Œæ•°-1)*(åˆ—æ•°-1)
 	if(!a1.search(/^(\d{1,2}),(\d{1,2}),(\d{1,3})$/)<0){return;}
 	var ir=parseInt(RegExp.$1), ic=parseInt(RegExp.$2), im=parseInt(RegExp.$3);
 	if(ir<8)  ir=8;
@@ -322,7 +323,7 @@ function ReDefine(){ //×Ô¶¨Òå(ĞĞÁĞ´óÇÒÀ×ÊıÉÙ£¬½«¿ÉÄÜµ¼ÖÂ¼ÆËãÒç³ö)
 		drawTable();
 	}
 }
-function SetLevel(Level){ //Level: 1³õ¼¶ 2ÖĞ¼¶ 3¸ß¼¶
+function SetLevel(Level){ //Level: 1åˆçº§ 2ä¸­çº§ 3é«˜çº§
 	switch(Level){
 		case 1:
 			rowsCount=8, colsCount=8, MinesCount=10;
@@ -338,13 +339,13 @@ function SetLevel(Level){ //Level: 1³õ¼¶ 2ÖĞ¼¶ 3¸ß¼¶
 	}
 	drawTable();
 }
-function setInit(td) //»Ö¸´
+function setInit(td) //æ¢å¤
 {
 	td.className='';
 	td.innerHTML="&nbsp;";
 	td.sta='';
 }
-function setOpen(td) //·­¿ª
+function setOpen(td) //ç¿»å¼€
 {
 	td.className='open';
 	td.sta="Open";
@@ -353,7 +354,7 @@ function setOpen(td) //·­¿ª
 		GameOver=1;
 	}
 }
-//OpenBA µİ¹éµ÷ÓÃ£¬´ò¿ªÏàÁÚµÄ¿Õ°×Çø
+//OpenBA é€’å½’è°ƒç”¨ï¼Œæ‰“å¼€ç›¸é‚»çš„ç©ºç™½åŒº
 function OpenBA(td){
 	if(!td){return;}
 	var im=td.i;
@@ -364,24 +365,24 @@ function OpenBA(td){
 		setNM(td);
 		return;
 	}
-	//·­¿ª±¾¸ñ
+	//ç¿»å¼€æœ¬æ ¼
 	if(td.sta=="Quest"){setInit(td);}
 	setOpen(td);
-	//·­¿ªÏàÁÚµÄ¿Õ°×Çø
+	//ç¿»å¼€ç›¸é‚»çš„ç©ºç™½åŒº
 	execAround(OpenBA,td,0);
 }
-function setMine(td) //À×±ê
+function setMine(td) //é›·æ ‡
 {
 	addMineRest(-1);
 	td.innerHTML=Mine;
 	td.sta="Mine";
 }
-function setQuest(td) //ÒÉÎÊ
+function setQuest(td) //ç–‘é—®
 {
 	td.innerHTML=Quest;
 	td.sta="Quest";
 }
-function setExplode(td) //±¬Õ¨
+function setExplode(td) //çˆ†ç‚¸
 {
 	td.bgColor=ExplodedBgcolor;
 	td.innerHTML=Explode;
@@ -390,11 +391,11 @@ function setExplode(td) //±¬Õ¨
 	GameOver=1;
 	showAll();
 }
-function CountTime() //¿ªÊ¼¼ÆÊ±
+function CountTime() //å¼€å§‹è®¡æ—¶
 {
 	if(GameOver){
 		if(OpenCount+MinesCount==gridCount){
-			alert("É¨À×³É¹¦£¬¹§Ï²Äú£¡"+(TimePast==999 ?"":"ºÄÊ±"+TimePast+"Ãë"));
+			alert("æ‰«é›·æˆåŠŸï¼Œæ­å–œæ‚¨ï¼"+(TimePast==999 ?"":"è€—æ—¶"+TimePast+"ç§’"));
 		}
 		return;
 	}
@@ -403,12 +404,12 @@ function CountTime() //¿ªÊ¼¼ÆÊ±
 	TimePast+=1;
 	TD_TimePast.innerHTML=TimePast;
 }
-function addMineRest(i) //Ê£ÓàÀ×Êı£¬¿ÉÎª¸ºÊı
+function addMineRest(i) //å‰©ä½™é›·æ•°ï¼Œå¯ä¸ºè´Ÿæ•°
 {
 	MineRest+=i;
 	TD_MineRest.innerHTML=MineRest;
 }
-function setNM(td) //ÏÔÊ¾À×Êı
+function setNM(td) //æ˜¾ç¤ºé›·æ•°
 {
 	var NM=td.NM;
 	if(NM>0){
@@ -417,7 +418,7 @@ function setNM(td) //ÏÔÊ¾À×Êı
 		td.style.fontWeight = "bold";
 	}
 }
-function showAll() //ÏÔÊ¾È«²¿
+function showAll() //æ˜¾ç¤ºå…¨éƒ¨
 {
 	var td
 	for(var im=0;im<gridCount;im++){
@@ -428,11 +429,11 @@ function showAll() //ÏÔÊ¾È«²¿
 		}
 	}
 }
-function SClick(td,evt) //µ¥»÷
+function SClick(td,evt) //å•å‡»
 {
 	if(GameOver){return;}
 	if((evt||window.event).button==2){
-		RClick(td,evt); //ÓÒ»÷
+		RClick(td,evt); //å³å‡»
 		return;
 	}
 	if(evt && evt.preventDefault) evt.preventDefault();
@@ -447,20 +448,20 @@ function SClick(td,evt) //µ¥»÷
 		OpenBA(td);
 	}
 }
-function DClick(td,evt) //Êó±êË«¼üÊÍ·ÅÊ±
+function DClick(td,evt) //é¼ æ ‡åŒé”®é‡Šæ”¾æ—¶
 {
 	if(GameOver){return;}
 	if(evt && evt.preventDefault) evt.preventDefault();
 	else if(window.event)  window.event.returnValue = false;
 	var h=td.hasMine;
-	//·­¿ªÏàÁÚµÄ¿Õ°×Çø
+	//ç¿»å¼€ç›¸é‚»çš„ç©ºç™½åŒº
 	if(!(td.sta=="Open" && td.NM>0)){return;}
 	var aroundTDS=[];
 	with(td){
 	aroundTDS=[UpTD,DownTD,LeftTD,RightTD,LeftUpTD,RightUpTD,LeftDownTD,RightDownTD];
 	}
-	var MCount_Flag=0; //ÖÜÎ§ÒÑ±êÀ×µÄ¸ñÊı
-	var MCount_hide=0; //ÖÜÎ§²ØÓĞÀ×µÄ¸ñÊı
+	var MCount_Flag=0; //å‘¨å›´å·²æ ‡é›·çš„æ ¼æ•°
+	var MCount_hide=0; //å‘¨å›´è—æœ‰é›·çš„æ ¼æ•°
 	for(var i=0;i<aroundTDS.length;i++){
 		if(!aroundTDS[i]){continue;}
 		if(aroundTDS[i].sta=="Mine"){MCount_Flag++;}
@@ -481,7 +482,7 @@ function DClick(td,evt) //Êó±êË«¼üÊÍ·ÅÊ±
 		}
 	}
 }
-function RClick(td,evt) //ÓÒ»÷
+function RClick(td,evt) //å³å‡»
 {
 	if(evt && evt.preventDefault) evt.preventDefault();
 	else if(window.event)  window.event.returnValue = false;
