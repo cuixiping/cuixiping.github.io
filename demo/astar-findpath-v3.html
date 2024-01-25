@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>a-star find best path (least turns)</title>
+<style type="text/css">
+button {min-width: 60px; min-height: 40px; padding: 10px; cursor: pointer;}
+table {border-collapse: collapse; border-spacing:0;}
+td {border:solid 1px #999; cursor:pointer; min-width:20px; min-height:20px;}
+td:not(.block):hover {background-color: #ccc;}
+td.block {background-color: #ccc;}
+td.path {background-color: #09f;}
+td.start {background-color: #f33;}
+td.end {background-color: #3f3;}
+td.close:not(.path):not(.start):not(.end) {background-color: #cff;}
+td.open:not(.path):not(.start):not(.end) {background-color: #ff9;}
+#msg {position:absolute; left: 500px; top: 120px;}
+</style>
+</head>
+
+<body>
+<p>Find best path (least turns)</p>
+<p>Click cells to toggle walkable</p>
+<div id="d1" class=""></div>
+<pre id="msg"></pre>
+
+<script src="astar-test-v3-dom.min.js"></script>
+
+</body>
+</html>
